@@ -137,7 +137,7 @@ export default function App() {
               </span>
 
             
-              <div className={`px-4 py-2.5 rounded-2xl text-[14px] leading-relaxed break-words shadow-sm
+              <div className={`px-4 py-2.5 rounded-2xl text-[14px] leading-relaxed wrap-break-word shadow-sm
                 ${msg.isMine 
                   ? "bg-purple-600 text-white rounded-tr-none" 
                   : "bg-[#1f2833] text-slate-200 border border-slate-800 rounded-tl-none"}`}
