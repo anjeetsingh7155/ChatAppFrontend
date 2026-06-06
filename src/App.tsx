@@ -9,7 +9,6 @@ type ChatMessage = {
 
 type ConnectionStatus = "connecting" | "connected" | "disconnected";
 
-// Set to a single default room recognized by your backend
 const DEFAULT_ROOM = "purple";
 
 function getTime() {
@@ -26,7 +25,7 @@ export default function App() {
   const wsRef = useRef<WebSocket | null>(null);
   const bottomRef = useRef<HTMLDivElement | null>(null);
 
-  // Connects directly to the backend server
+  
   const connect = useCallback(() => {
     if (wsRef.current) {
       wsRef.current.close();
@@ -39,7 +38,7 @@ export default function App() {
 
     ws.onopen = () => {
       setStatus("connected");
-      // Matches your backend's JoinMessage interface
+      
       ws.send(JSON.stringify({ type: "join", payload: { roomId: DEFAULT_ROOM } }));
     };
 
@@ -47,7 +46,7 @@ export default function App() {
       const incomingText = event.data as string;
       
       setMessages((prev) => {
-        // Prevents duplicate rendering of your own message when the backend broadcasts it back
+        
         const isDuplicateSelfBroadcast = 
           prev.length > 0 && 
           prev[prev.length - 1].isMine && 
@@ -73,7 +72,7 @@ export default function App() {
     ws.onclose = () => setStatus("disconnected");
   }, []);
 
-  // Initialize connection on mount
+  
   useEffect(() => {
     let isMounted = true;
     const timer = window.setTimeout(() => {
@@ -89,7 +88,7 @@ export default function App() {
     };
   }, [connect]);
 
-  // Keep chat scrolled to the bottom
+  
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
@@ -99,46 +98,45 @@ export default function App() {
     const ws = wsRef.current;
     if (!text || !ws || ws.readyState !== WebSocket.OPEN) return;
 
-    // Optimistic UI updates
+    
     setMessages((prev) => [
       ...prev,
       { id: ++msgCounter, text, isMine: true, timestamp: getTime() },
     ]);
 
-    // Matches your backend's ChatMessage interface
+  
     ws.send(JSON.stringify({ type: "chat", payload: { message: text } }));
     setInputValue("");
   };
 
   return (
     <div className="flex flex-col h-screen bg-[#0b0c10] text-slate-100 font-sans antialiased">
-      
-      {/* ── Top Header ── */}
+     
       <header className="h-16 border-b border-slate-900 px-6 flex items-center justify-between bg-[#1f2833]/30 backdrop-blur-sm shrink-0">
         <div className="flex items-center gap-2">
           <span className="text-xl font-bold text-purple-400">#</span>
           <span className="font-semibold text-slate-200">Global Chat</span>
         </div>
         
-        {/* Network Status Badge */}
+      
         <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-900/50 border border-slate-800 text-xs">
           <span className={`w-2 h-2 rounded-full ${status === "connected" ? "bg-emerald-400" : status === "connecting" ? "bg-amber-400" : "bg-rose-500"}`} />
           <span className="text-[11px] font-medium text-slate-400 lowercase">{status}</span>
         </div>
       </header>
 
-      {/* ── Message Panel ── */}
+   
       <main className="flex-1 overflow-y-auto p-6 space-y-4">
         {messages.map((msg) => (
           <div key={msg.id} className={`flex ${msg.isMine ? "justify-end" : "justify-start"}`}>
             <div className={`flex flex-col max-w-[70%] gap-1 ${msg.isMine ? "items-end" : "items-start"}`}>
               
-              {/* Meta Info */}
+              
               <span className="text-[11px] text-slate-500 font-medium px-1">
                 {msg.isMine ? "You" : "Peer"} • {msg.timestamp}
               </span>
 
-              {/* Message Bubble */}
+            
               <div className={`px-4 py-2.5 rounded-2xl text-[14px] leading-relaxed break-words shadow-sm
                 ${msg.isMine 
                   ? "bg-purple-600 text-white rounded-tr-none" 
@@ -153,7 +151,6 @@ export default function App() {
         <div ref={bottomRef} />
       </main>
 
-      {/* ── Input Box Form Footer ── */}
       <footer className="p-4 border-t border-slate-900 bg-[#1f2833]/10 shrink-0">
         <div className="flex items-center gap-2 max-w-4xl mx-auto bg-[#1a1b23] border border-slate-800 rounded-xl p-1.5 focus-within:border-purple-500/50 transition-all">
           <input
