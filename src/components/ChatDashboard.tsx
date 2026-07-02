@@ -195,11 +195,11 @@ export default function ChatDashboard({ token, user, onLogout }: ChatDashboardPr
         {/* Brand Header */}
         <div className="h-16 px-6 border-b border-slate-900 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="p-1.5 rounded-lg bg-linear-to-tr from-purple-600 to-emerald-500">
-              <BookOpen className="w-5 h-5 text-white" />
+            <div className="p-1.5 rounded-lg bg-gradient-to-tr from-purple-600 to-indigo-500">
+              <BookOpen className="w-4 h-4 text-white" />
             </div>
-            <span className="font-extrabold text-lg tracking-wide bg-linear-to-r from-purple-400 to-emerald-400 bg-clip-text text-transparent">
-              EduChat Live
+            <span className="font-extrabold text-base tracking-wide text-slate-100">
+              StudySpace
             </span>
           </div>
         </div>
