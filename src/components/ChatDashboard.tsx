@@ -41,7 +41,8 @@ export default function ChatDashboard({ token, user, onLogout }: ChatDashboardPr
   // Fetch Message History from Express API
   const fetchHistory = useCallback(async (room: string) => {
     try {
-      const response = await fetch(`http://localhost:8080/api/messages/${room}`, {
+      const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:8080";
+      const response = await fetch(`${baseUrl}/api/messages/${room}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -73,7 +74,8 @@ export default function ChatDashboard({ token, user, onLogout }: ChatDashboardPr
 
     setStatus("connecting");
 
-    const ws = new WebSocket("ws://localhost:8080");
+    const wsUrl = import.meta.env.VITE_WS_URL || "ws://localhost:8080";
+    const ws = new WebSocket(wsUrl);
     wsRef.current = ws;
 
     ws.onopen = () => {

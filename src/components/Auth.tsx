@@ -33,9 +33,10 @@ export default function Auth({ onSuccess }: AuthProps) {
 
     setLoading(true);
 
+    const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:8080";
     const url = isLogin
-      ? "http://localhost:8080/api/auth/login"
-      : "http://localhost:8080/api/auth/register";
+      ? `${baseUrl}/api/auth/login`
+      : `${baseUrl}/api/auth/register`;
 
     const payload = isLogin
       ? { email, password }
