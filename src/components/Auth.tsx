@@ -72,14 +72,14 @@ export default function Auth({ onSuccess }: AuthProps) {
   return (
     <div className="min-h-screen flex bg-[#06070a] text-slate-100 font-sans overflow-hidden w-full relative">
       {/* Decorative gradient glowing spheres in background */}
-      <div className="absolute top-[-10%] left-[-10%] w-[450px] h-[450px] rounded-full bg-purple-600/5 blur-[150px] pointer-events-none" />
-      <div className="absolute bottom-[-10%] right-[-10%] w-[450px] h-[450px] rounded-full bg-indigo-500/5 blur-[150px] pointer-events-none" />
+      <div className="absolute top-[-10%] left-[-10%] w-112.5 h-112.5 rounded-full bg-purple-600/5 blur-[150px] pointer-events-none" />
+      <div className="absolute bottom-[-10%] right-[-10%] w-112.5 h-112.5 rounded-full bg-indigo-500/5 blur-[150px] pointer-events-none" />
 
       {/* Left side: branding and features */}
       <div className="hidden lg:flex w-1/2 bg-[#090b10]/40 border-r border-slate-900/60 p-16 flex-col justify-between relative overflow-hidden shrink-0 select-none">
         {/* Top logo */}
         <div className="flex items-center gap-2 relative z-10">
-          <div className="p-1.5 rounded-lg bg-gradient-to-tr from-purple-600 to-indigo-500">
+          <div className="p-1.5 rounded-lg bg-linear-to-tr from-purple-600 to-indigo-500">
             <BookOpen className="w-4 h-4 text-white" />
           </div>
           <span className="font-extrabold text-sm tracking-wide text-slate-100">
@@ -92,7 +92,7 @@ export default function Auth({ onSuccess }: AuthProps) {
           {isLogin ? (
             <div className="space-y-4">
               <h1 className="text-3xl font-extrabold tracking-tight leading-tight text-slate-200">
-                Welcome <span className="bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text text-transparent">Back!</span>
+                Welcome <span className="bg-linear-to-r from-purple-400 to-indigo-400 bg-clip-text text-transparent">Back!</span>
                 <br />We missed you.
               </h1>
               <p className="text-xs text-slate-500 leading-relaxed font-medium">
@@ -104,7 +104,7 @@ export default function Auth({ onSuccess }: AuthProps) {
               <h1 className="text-3xl font-extrabold tracking-tight leading-tight text-slate-200">
                 Learn Together.
                 <br />
-                <span className="bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text text-transparent">Grow</span> Together.
+                <span className="bg-linear-to-r from-purple-400 to-indigo-400 bg-clip-text text-transparent">Grow</span> Together.
               </h1>
               <p className="text-xs text-slate-500 leading-relaxed font-medium">
                 Join a collaborative study space where ideas connect and knowledge grows.
@@ -158,7 +158,7 @@ export default function Auth({ onSuccess }: AuthProps) {
 
       {/* Right side: Auth Form card */}
       <div className="w-full lg:w-1/2 flex items-center justify-center p-6 relative">
-        <div className="w-full max-w-[420px] bg-[#0c0e15]/40 border border-slate-900/80 rounded-2xl p-8 backdrop-blur-md shadow-2xl relative">
+        <div className="w-full max-w-105 bg-[#0c0e15]/40 border border-slate-900/80 rounded-2xl p-8 backdrop-blur-md shadow-2xl relative">
           <div className="text-center mb-6">
             {/* Header Icon */}
             {isLogin ? (

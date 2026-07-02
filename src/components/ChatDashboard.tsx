@@ -39,7 +39,7 @@ export default function ChatDashboard({ token, user, onLogout }: ChatDashboardPr
   const bottomRef = useRef<HTMLDivElement | null>(null);
 
   // Fetch Message History from Express API
-  const fetchHistory = async (room: string) => {
+  const fetchHistory = useCallback(async (room: string) => {
     try {
       const response = await fetch(`http://localhost:8080/api/messages/${room}`, {
         headers: {
@@ -63,7 +63,7 @@ export default function ChatDashboard({ token, user, onLogout }: ChatDashboardPr
     } catch (error) {
       console.error("Failed to load chat history", error);
     }
-  };
+  }, [token]);
 
   // Connect & Join WS Room
   const connectWebSocket = useCallback(() => {
@@ -130,7 +130,7 @@ export default function ChatDashboard({ token, user, onLogout }: ChatDashboardPr
       clearTimeout(timer);
       wsRef.current?.close();
     };
-  }, [activeRoom, connectWebSocket]);
+  }, [activeRoom, connectWebSocket, fetchHistory]);
 
   // Scroll to bottom
   useEffect(() => {
@@ -195,10 +195,10 @@ export default function ChatDashboard({ token, user, onLogout }: ChatDashboardPr
         {/* Brand Header */}
         <div className="h-16 px-6 border-b border-slate-900 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="p-1.5 rounded-lg bg-gradient-to-tr from-purple-600 to-emerald-500">
+            <div className="p-1.5 rounded-lg bg-linear-to-tr from-purple-600 to-emerald-500">
               <BookOpen className="w-5 h-5 text-white" />
             </div>
-            <span className="font-extrabold text-lg tracking-wide bg-gradient-to-r from-purple-400 to-emerald-400 bg-clip-text text-transparent">
+            <span className="font-extrabold text-lg tracking-wide bg-linear-to-r from-purple-400 to-emerald-400 bg-clip-text text-transparent">
               EduChat Live
             </span>
           </div>
@@ -326,7 +326,7 @@ export default function ChatDashboard({ token, user, onLogout }: ChatDashboardPr
                     </span>
 
                     <div
-                      className={`px-4 py-2.5 rounded-2xl text-[13px] leading-relaxed break-words shadow-sm ${
+                      className={`px-4 py-2.5 rounded-2xl text-[13px] leading-relaxed wrap-break-word shadow-sm ${
                         isMe
                           ? "bg-purple-600 text-white rounded-tr-none"
                           : "bg-[#1f2833]/40 text-slate-200 border border-slate-800/80 rounded-tl-none"
