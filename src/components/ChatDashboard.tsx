@@ -195,7 +195,7 @@ export default function ChatDashboard({ token, user, onLogout }: ChatDashboardPr
         {/* Brand Header */}
         <div className="h-16 px-6 border-b border-slate-900 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="p-1.5 rounded-lg bg-gradient-to-tr from-purple-600 to-indigo-500">
+            <div className="p-1.5 rounded-lg bg-linear-to-tr from-purple-600 to-indigo-500">
               <BookOpen className="w-4 h-4 text-white" />
             </div>
             <span className="font-extrabold text-base tracking-wide text-slate-100">
